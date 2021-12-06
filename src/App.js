@@ -5,7 +5,7 @@ import Container from "./Container";
 
 function App() {
   let parser = new Parser();
-  const [data, setData] = useState([{}]);
+  const [data, setData] = useState([]);
   // const [rssInput, setRssInput] = useState("");
   const [rssFeeds] = useState([
     "https://www.theverge.com/rss/index.xml",
@@ -34,7 +34,8 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(data);
+  console.log(data.length);
+  console.log(loading);
 
   // function onSubmit(e) {
   //   e.preventDefault();

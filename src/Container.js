@@ -24,7 +24,7 @@ const Container = (props) => {
       </div>
       <div className="columnSpace"></div>
       <div className="columnArticleList">
-        {items.map((item, index) => (
+        {data[selectedFeed].items.map((item, index) => (
           <ArticleList
             data={item}
             key={index}
