@@ -5,6 +5,10 @@ import Container from "./Container";
 
 function App() {
   let parser = new Parser();
+
+  const CORS_PROXY = "https://young-cliffs-38123.herokuapp.com/";
+  // const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+
   const [data, setData] = useState([]);
   // const [rssInput, setRssInput] = useState("");
   const [rssFeeds] = useState([
@@ -21,7 +25,9 @@ function App() {
       setLoading(true);
       const feed = [];
       for (let i = 0; i < props.length; i++) {
-        feed[i] = await parser.parseURL(props[i]);
+        feed[i] = await parser
+          .parseURL(CORS_PROXY + props[i])
+          .catch((e) => "RSS Feed not loaded");
       }
       setData(feed);
     } finally {
@@ -34,8 +40,8 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(data.length);
-  console.log(loading);
+  // console.log(data);
+  // console.log(loading);
 
   // function onSubmit(e) {
   //   e.preventDefault();

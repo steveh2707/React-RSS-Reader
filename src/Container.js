@@ -7,13 +7,18 @@ const Container = (props) => {
   const { data } = props;
   const [selectedArticle, setSelectedArticle] = useState(0);
   const [selectedFeed, setSelectedFeed] = useState(0);
-  const items = data[selectedFeed].items;
+
+  const filteredData = [];
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i] !== "RSS Feed not loaded") filteredData.push(data[i]);
+  }
 
   return (
     <div className="background">
       <div className="columnNav">
         <h2 style={{ textAlign: "center" }}>Feeds</h2>
-        {data.map((item, index) => (
+        {filteredData.map((item, index) => (
           <FeedList
             data={item}
             key={index}
@@ -24,7 +29,7 @@ const Container = (props) => {
       </div>
       <div className="columnSpace"></div>
       <div className="columnArticleList">
-        {data[selectedFeed].items.map((item, index) => (
+        {filteredData[selectedFeed].items.map((item, index) => (
           <ArticleList
             data={item}
             key={index}
@@ -35,7 +40,7 @@ const Container = (props) => {
       </div>
       <div className="columnSpace"></div>
       <div className="columnArticle">
-        <EachArticle data={items[selectedArticle]} />
+        <EachArticle data={filteredData[selectedFeed].items[selectedArticle]} />
       </div>
     </div>
   );
