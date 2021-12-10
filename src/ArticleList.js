@@ -3,17 +3,29 @@ import React from "react";
 const ArticleList = (props) => {
   // const htmlString = props.data.content;
 
+  function onClick() {
+    props.setSelectedArticle(props.index);
+    props.data.read = true;
+    // console.log(props.data);
+  }
+
   return (
     <button
-      className="articleList"
-      onClick={() => props.setSelectedArticle(props.index)}
+      className={`articleList ${props.data.read ? "articleListRead" : ""} ${
+        props.selectedArticle === props.index ? "articleListSelected" : ""
+      }`}
+      onClick={onClick}
     >
       <div>
         <div>
-          <h2>{props.data.title}</h2>
+          <p className="listTitle">{props.data.title}</p>
           {/* <p>{props.data.pubDate.toString()}</p> */}
-          <p>{props.data.contentSnippet.substring(0, 150)}...</p>
-          <a href={props.data.link}>Continue Reading</a>
+          <p className="listSnippet">
+            {props.data.contentSnippet.substring(0, 150)}...
+          </p>
+          {/* <a className="listLink" href={props.data.link}>
+            Continue Reading
+          </a> */}
         </div>
       </div>
     </button>

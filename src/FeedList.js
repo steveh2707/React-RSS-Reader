@@ -4,15 +4,15 @@ const FeedList = (props) => {
   return (
     <div>
       <button
-        className="FeedList"
-        onClick={() => props.setSelectedFeed(props.index)}
+        className={`FeedList ${
+          props.selectedFeed === props.index ? "FeedListSelected" : ""
+        }`}
+        onClick={() => {
+          props.setSelectedFeed(props.index);
+          props.setSelectedArticle(0);
+        }}
       >
-        <div>
-          <div>
-            <h3>{props.data.title}</h3>
-            {/* <p>{props.data.link}</p> */}
-          </div>
-        </div>
+        {props.data.title}
       </button>
     </div>
   );

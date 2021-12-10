@@ -5,7 +5,7 @@ function EachArticle(props) {
 
   return (
     <div className="article">
-      <h2>{props.data.title}</h2>
+      <h3>{props.data.title}</h3>
       <div dangerouslySetInnerHTML={{ __html: htmlString }} />
     </div>
   );
