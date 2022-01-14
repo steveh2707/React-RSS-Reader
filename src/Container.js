@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ArticleList from "./ArticleList";
 import EachArticle from "./EachArticle";
 import FeedList from "./FeedList";
@@ -16,8 +16,8 @@ const Container = (props) => {
   const [selectedArticle, setSelectedArticle] = useState(0);
   const [selectedFeed, setSelectedFeed] = useState(0);
   const [modal, setModal] = useState(false);
-  const [isOpenFeeds, setIsOpenFeeds] = useState(true);
-  const [isOpenArticles] = useState(true);
+  const [isOpenFeeds] = useState(true);
+  // const [isOpenArticles] = useState(true);
 
   const filteredData = [];
 
