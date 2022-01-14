@@ -9,6 +9,11 @@ body {
   height: 100%;
 }
 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -57,11 +62,14 @@ a {
   margin: 2px auto 2px auto;
   background-color: #161616;
   color: #ffffff;
-  text-align: center;
+  text-align: left;
   border: 0px;
   border-radius: 5px;
   width: 100%;
-  font-weight: bolder;
+  font-weight: bold;
+  font-size: 12px;
+  height: 35px;
+  overflow: hidden;
 }
 
 .FeedListSelected {
@@ -145,4 +153,17 @@ a {
 
 .listLink {
   font-size: small;
+}
+
+body::-webkit-scrollbar {
+  width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }

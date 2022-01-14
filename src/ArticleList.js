@@ -18,6 +18,16 @@ const ArticleList = (props) => {
     >
       <div>
         <div>
+          <div
+            style={{
+              fontVariant: "small-caps",
+              fontSize: "small",
+              fontWeight: "bold",
+              color: "gray",
+            }}
+          >
+            {props.data.feed}
+          </div>
           <p className="listTitle">{props.data.title}</p>
           {/* <p>{props.data.pubDate.toString()}</p> */}
           <p className="listSnippet">

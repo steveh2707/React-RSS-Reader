@@ -1,6 +1,16 @@
 import React from "react";
 
 const FeedList = (props) => {
+  let count = 0;
+
+  for (let i = 0; i < props.data.items.length; i++) {
+    if (props.data.items[i].read === false) {
+      count++;
+    }
+  }
+
+  let charLimit = 23;
+
   return (
     <div>
       <button
@@ -12,7 +22,16 @@ const FeedList = (props) => {
           props.setSelectedArticle(0);
         }}
       >
-        {props.data.title}
+        <div style={{ width: "100%", float: "left", marginRight: "-100px" }}>
+          {props.data.title.substring(0, charLimit)}
+          {props.data.title.length > charLimit ? "..." : ""}
+        </div>
+
+        <div
+          style={{ textAlign: "right", fontWeight: "normal", color: "gray" }}
+        >
+          {count}
+        </div>
       </button>
     </div>
   );

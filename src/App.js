@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Parser from "rss-parser";
 import Container from "./Container";
+import { Spinner } from "reactstrap";
 // import Test from "./Test";
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
     "https://rss.art19.com/apology-line",
     "https://feeds.simplecast.com/54nAGcIl",
     "https://feeds.megaphone.fm/ADL9840290619",
+    "https://www.eonline.com/syndication/feeds/rssfeeds/topstories.xml",
+    "http://www.tmz.com/rss",
   ]);
   const [loading, setLoading] = useState(true);
 
@@ -38,7 +41,10 @@ function App() {
           if (typeof feed[i] === "object") filteredFeed.push(feed[i]);
         }
         for (let i = 0; i < filteredFeed.length; i++) {
-          filteredFeed[i].items.map((item) => (item.read = false));
+          filteredFeed[i].items.forEach((item) => {
+            item.read = false;
+            item.feed = filteredFeed[i].title;
+          });
         }
         setData(filteredFeed);
       } finally {
@@ -49,9 +55,22 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rssFeeds]);
 
-  console.log(data);
+  // console.log(data);
 
-  if (loading) return <div className="background">Loading</div>;
+  if (loading)
+    return (
+      <div className="background">
+        <div
+          style={{
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+          }}
+        >
+          <Spinner>Loading...</Spinner>
+        </div>
+      </div>
+    );
 
   return (
     <div>

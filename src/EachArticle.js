@@ -7,6 +7,7 @@ function EachArticle(props) {
     <div className="article">
       <h3>{props.data.title}</h3>
       <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+      {/* <a href={props.data.link}>Continue Reading</a> */}
     </div>
   );
 }
