@@ -151,6 +151,27 @@ a {
   color: gray;
 }
 
+.articleHeading {
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  margin: 2px auto 2px auto;
+  background-color: #161616;
+  color: #ffffff;
+  text-align: left;
+  border: 0px;
+  /* border: 2px solid #000000; */
+  border-radius: 5px;
+}
+
+.articleHeading:hover {
+  background-color: #252525;
+}
+
+.articleBody {
+  padding: 0px 10px;
+  margin: 12px auto 2px auto;
+}
+
 .listLink {
   font-size: small;
 }

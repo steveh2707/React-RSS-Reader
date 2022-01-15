@@ -20,6 +20,7 @@ const FeedList = (props) => {
         onClick={() => {
           props.setSelectedFeed(props.index);
           props.setSelectedArticle(0);
+          props.data.items[0].read = true;
         }}
       >
         <div style={{ width: "100%", float: "left", marginRight: "-100px" }}>
@@ -30,7 +31,7 @@ const FeedList = (props) => {
         <div
           style={{ textAlign: "right", fontWeight: "normal", color: "gray" }}
         >
-          {count}
+          {count !== 0 ? count : ""}
         </div>
       </button>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EachArticle from "../EachArticle";
+import Article from "../Article";
 let Parser = require("rss-parser");
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
 
       <div>
         {items.map((item, index) => (
-          <EachArticle data={item} key={index} />
+          <Article data={item} key={index} />
         ))}
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ArticleList from "./ArticleList";
-import EachArticle from "./EachArticle";
+import Article from "./Article";
 import FeedList from "./FeedList";
 import {
   Modal,
@@ -32,10 +32,11 @@ const Container = (props) => {
     if (data[i] !== "RSS Feed not loaded") filteredData.push(data[i]);
   }
 
+  console.log(filteredData);
+
   function onSubmit(e) {
     e.preventDefault();
     props.setRssFeeds((prevState) => [...prevState, props.rssInput]);
-    // console.log("working");
   }
 
   return (
@@ -121,9 +122,7 @@ const Container = (props) => {
 
       <div className="columnArticle">
         {data.length !== 0 ? (
-          <EachArticle
-            data={filteredData[selectedFeed].items[selectedArticle]}
-          />
+          <Article data={filteredData[selectedFeed].items[selectedArticle]} />
         ) : (
           <div className="article">Article will be shown here</div>
         )}

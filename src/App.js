@@ -72,6 +72,9 @@ function App() {
       </div>
     );
 
+  // Set first article of first feed to read on load
+  if (data[0] !== "RSS Feed not loaded") data[0].items[0].read = true;
+
   return (
     <div>
       <Container
