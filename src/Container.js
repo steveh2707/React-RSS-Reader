@@ -66,13 +66,6 @@ const Container = (props) => {
               Unable to load {props.errors.length} feeds
             </Alert>
           )}
-          <button
-            className="FeedList"
-            style={{ textAlign: "center" }}
-            onClick={() => setModal(!modal)}
-          >
-            Add New Feed
-          </button>
         </div>
       );
     }
@@ -81,7 +74,7 @@ const Container = (props) => {
   function loadArticleList() {
     if (props.loading) {
       return <Loading />;
-    } else {
+    } else if (!props.loading) {
       return (
         <div>
           <br />
@@ -137,6 +130,13 @@ const Container = (props) => {
           </h2>
 
           {loadFeedList()}
+          <button
+            className="FeedList"
+            style={{ textAlign: "center" }}
+            onClick={() => setModal(!modal)}
+          >
+            Add New Feed
+          </button>
 
           <Modal isOpen={modal} toggle={() => setModal(!modal)}>
             <ModalHeader toggle={() => setModal(!modal)}>
