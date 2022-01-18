@@ -16,7 +16,7 @@ function App() {
 
   let noFeeds = rssFeeds.length;
 
-  console.log(noFeeds);
+  // console.log(noFeeds);
 
   useEffect(() => {
     for (let i = 0; i < noFeeds; i++) {
@@ -36,7 +36,7 @@ function App() {
     }
   }, [data]);
 
-  console.log(data);
+  // console.log(data);
 
   if (items === "") return <div>Loading</div>;
 

@@ -23,13 +23,6 @@ function Article(props) {
         </button>
       </a>
 
-      {/* <button
-      className={`articleList ${props.data.read ? "articleListRead" : ""} ${
-        props.selectedArticle === props.index ? "articleListSelected" : ""
-      }`}
-      onClick={onClick}
-    ></button> */}
-
       <div
         className="articleBody"
         dangerouslySetInnerHTML={{ __html: htmlString }}

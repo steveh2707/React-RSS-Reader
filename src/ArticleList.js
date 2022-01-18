@@ -9,6 +9,8 @@ const ArticleList = (props) => {
     // console.log(props.data);
   }
 
+  // console.log(props.data);
+
   return (
     <button
       className={`articleList ${props.data.read ? "articleListRead" : ""} ${
