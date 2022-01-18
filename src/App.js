@@ -73,6 +73,12 @@ function App() {
               return;
             }
           }
+
+          feed.items.forEach((item) => {
+            item.read = false;
+            item.feed = feed.title;
+          });
+
           setData((prevState) => [...prevState, feed]);
         } else {
           for (let i = 0; i < errors.length; i++) {
@@ -94,7 +100,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rssFeeds]);
 
-  // console.log(errors);
+  // console.log(data);
 
   // console.log(errors);
 

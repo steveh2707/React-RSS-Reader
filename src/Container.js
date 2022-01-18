@@ -21,8 +21,6 @@ const Container = (props) => {
   const [isOpenFeeds] = useState(true);
   // const [isOpenArticles] = useState(true);
 
-  console.log(props.errors.length);
-
   const filteredData = [];
 
   for (let i = 0; i < data.length; i++) {
