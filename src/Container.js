@@ -21,12 +21,6 @@ const Container = (props) => {
   const [isOpenFeeds] = useState(true);
   // const [isOpenArticles] = useState(true);
 
-  const filteredData = [];
-
-  for (let i = 0; i < data.length; i++) {
-    if (data[i] !== "RSS Feed not loaded") filteredData.push(data[i]);
-  }
-
   // useEffect(() => {
   //   function handleResize() {
   //     console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
@@ -34,7 +28,7 @@ const Container = (props) => {
   //   window.addEventListener("resize", handleResize);
   // });
 
-  // console.log(filteredData);
+  console.log(data);
 
   function loadFeedList() {
     if (props.loading) {
@@ -42,7 +36,7 @@ const Container = (props) => {
     } else {
       return (
         <div>
-          {filteredData.map((item, index) => (
+          {data.map((item, index) => (
             <FeedList
               data={item}
               key={index}
@@ -60,6 +54,8 @@ const Container = (props) => {
                 margin: "2px auto 2px auto",
                 height: "35px",
                 padding: "7px 20px 7px 20px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
               }}
               color="danger"
             >
@@ -81,7 +77,19 @@ const Container = (props) => {
           <h3 style={{ fontVariant: "small-caps" }}>
             {props.data[selectedFeed].title}
           </h3>
-          {filteredData[selectedFeed].items.map((item, index) => (
+
+          {/* {props.allItems.map((item, index) => (
+            <ArticleList
+              allArticles={data}
+              data={item}
+              key={index}
+              index={index}
+              selectedArticle={selectedArticle}
+              setSelectedArticle={setSelectedArticle}
+            />
+          ))} */}
+
+          {data[selectedFeed].items.map((item, index) => (
             <ArticleList
               allArticles={data}
               data={item}
@@ -102,7 +110,7 @@ const Container = (props) => {
     } else {
       return (
         <div>
-          <Article data={filteredData[selectedFeed].items[selectedArticle]} />
+          <Article data={data[selectedFeed].items[selectedArticle]} />
         </div>
       );
     }

@@ -4,9 +4,7 @@ import Container from "./Container";
 
 function App() {
   let parser = new Parser();
-
   const CORS_PROXY = "https://young-cliffs-38123.herokuapp.com/";
-  // const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
   const [data, setData] = useState([]);
   const [rssInput, setRssInput] = useState("");
@@ -30,9 +28,10 @@ function App() {
   ]);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState([]);
+  const [allItems, setAllItems] = useState([]);
 
   useEffect(() => {
-    async function getRssFeed(feedName, dataStore, errorStore) {
+    async function getRssFeed(feedName, errorStore, dataStore) {
       try {
         let feed = await parser.parseURL(CORS_PROXY + feedName);
         feed.items.forEach((item) => {
@@ -40,6 +39,15 @@ function App() {
           item.feed = feed.title;
         });
         dataStore((prevState) => [...prevState, feed]);
+
+        // for (leti=0; i<feed.items.length; i++){
+        //   let feedName = feed.name
+        //   if (feed.items[i]===data) {
+
+        //   }
+        // }
+
+        setAllItems((prevState) => [...prevState, ...feed.items]);
         setLoading(false);
       } catch (e) {
         errorStore((prevState) => [...prevState, [feedName, e]]);
@@ -49,19 +57,17 @@ function App() {
     // First run
     if (loading) {
       for (let i = 0; i < rssFeeds.length; i++) {
-        getRssFeed(rssFeeds[i], setData, setErrors);
+        getRssFeed(rssFeeds[i], setErrors, setData);
       }
-    }
-
-    // New RSS feed added
+    } // New RSS feed added
     else {
-      getRssFeed(rssFeeds[rssFeeds.length - 1], setData, setErrors);
+      getRssFeed(rssFeeds[rssFeeds.length], setErrors, setData);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rssFeeds]);
 
-  console.log(rssFeeds);
+  console.log(allItems);
 
   // Set first article of first feed to read on load
   if (!loading) data[0].items[0].read = true;
@@ -79,6 +85,7 @@ function App() {
           setRssFeeds={setRssFeeds}
           loading={loading}
           errors={errors}
+          allItems={allItems}
         />
       )}
     </div>

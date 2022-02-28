@@ -9,8 +9,6 @@ const FeedList = (props) => {
     }
   }
 
-  let charLimit = 23;
-
   return (
     <div>
       <button
@@ -23,9 +21,16 @@ const FeedList = (props) => {
           props.data.items[0].read = true;
         }}
       >
-        <div style={{ width: "100%", float: "left", marginRight: "-100px" }}>
-          {props.data.title.substring(0, charLimit)}
-          {props.data.title.length > charLimit ? "..." : ""}
+        <div
+          style={{
+            width: "85%",
+            float: "left",
+            marginRight: "-100px",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+          }}
+        >
+          {props.data.title}
         </div>
 
         <div

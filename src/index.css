@@ -7,11 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding: 0px;
   height: 100%;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
+  /* overflow: overlay; */
+  /* scrollbar-gutter: auto; */
 }
 
 code {
@@ -116,28 +113,52 @@ a {
   height: inherit;
   width: 16%;
   float: left;
-  overflow: scroll;
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.columnNav:hover {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .columnArticleList {
   height: inherit;
   width: 40%;
   float: left;
-  overflow: scroll;
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.columnArticleList:hover {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .columnArticle {
   height: inherit;
   width: 40%;
   float: left;
-  overflow: scroll;
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.columnArticle:hover {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .columnSpace {
   height: 100vh;
   width: 2%;
   float: left;
-  overflow: scroll;
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.columnSpace:hover {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .listTitle {
@@ -176,7 +197,7 @@ a {
   font-size: small;
 }
 
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
   width: 1em;
 }
 
@@ -187,4 +208,28 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+} */
+
+/* ::-webkit-scrollbar {
+  width: 20px;
+} */
+::-webkit-scrollbar {
+  width: 5px;
 }
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+} */
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+  border-radius: 10px;
+}
+
+/* Handle on hover
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+} */
