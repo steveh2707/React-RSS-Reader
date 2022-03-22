@@ -16,7 +16,7 @@ import Loading from "./Loading";
 const Container = (props) => {
   const { data } = props;
   const [selectedArticle, setSelectedArticle] = useState(0);
-  const [selectedFeed, setSelectedFeed] = useState(0);
+  const [selectedFeed, setSelectedFeed] = useState(-1);
   const [modal, setModal] = useState(false);
   const [isOpenFeeds] = useState(true);
   // const [isOpenArticles] = useState(true);
@@ -28,7 +28,8 @@ const Container = (props) => {
   //   window.addEventListener("resize", handleResize);
   // });
 
-  console.log(data);
+  // console.log(data);
+  // console.log(props.allItems);
 
   function loadFeedList() {
     if (props.loading) {
@@ -36,6 +37,14 @@ const Container = (props) => {
     } else {
       return (
         <div>
+          <FeedList
+            data={{ title: "All Feeds", items: props.allItems }}
+            index={-1}
+            selectedFeed={selectedFeed}
+            setSelectedFeed={setSelectedFeed}
+            setSelectedArticle={setSelectedArticle}
+          />
+          <br />
           {data.map((item, index) => (
             <FeedList
               data={item}
@@ -69,36 +78,40 @@ const Container = (props) => {
 
   function loadArticleList() {
     if (props.loading) {
-      return <Loading />;
+      return <div></div>;
     } else if (!props.loading) {
       return (
         <div>
           <br />
-          <h3 style={{ fontVariant: "small-caps" }}>
-            {props.data[selectedFeed].title}
-          </h3>
+          {selectedFeed === -1 ? (
+            <h3 style={{ fontVariant: "small-caps" }}>All Feeds</h3>
+          ) : (
+            <h3 style={{ fontVariant: "small-caps" }}>
+              {props.data[selectedFeed].title}
+            </h3>
+          )}
 
-          {/* {props.allItems.map((item, index) => (
-            <ArticleList
-              allArticles={data}
-              data={item}
-              key={index}
-              index={index}
-              selectedArticle={selectedArticle}
-              setSelectedArticle={setSelectedArticle}
-            />
-          ))} */}
-
-          {data[selectedFeed].items.map((item, index) => (
-            <ArticleList
-              allArticles={data}
-              data={item}
-              key={index}
-              index={index}
-              selectedArticle={selectedArticle}
-              setSelectedArticle={setSelectedArticle}
-            />
-          ))}
+          {selectedFeed === -1
+            ? props.allItems.map((item, index) => (
+                <ArticleList
+                  allArticles={data}
+                  data={item}
+                  key={index}
+                  index={index}
+                  selectedArticle={selectedArticle}
+                  setSelectedArticle={setSelectedArticle}
+                />
+              ))
+            : data[selectedFeed].items.map((item, index) => (
+                <ArticleList
+                  allArticles={data}
+                  data={item}
+                  key={index}
+                  index={index}
+                  selectedArticle={selectedArticle}
+                  setSelectedArticle={setSelectedArticle}
+                />
+              ))}
         </div>
       );
     }
@@ -106,11 +119,16 @@ const Container = (props) => {
 
   function loadArticle() {
     if (props.loading) {
-      return <Loading />;
+      return <div></div>;
     } else {
       return (
         <div>
-          <Article data={data[selectedFeed].items[selectedArticle]} />
+          {selectedFeed === -1 ? (
+            <Article data={props.allItems[selectedArticle]} />
+          ) : (
+            <Article data={data[selectedFeed].items[selectedArticle]} />
+          )}
+          {/* <Article data={data[selectedFeed].items[selectedArticle]} /> */}
         </div>
       );
     }

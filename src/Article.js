@@ -1,4 +1,5 @@
 import React from "react";
+import dateTransformer from "./dateTransformer";
 
 function Article(props) {
   const htmlString = props.data.content;
@@ -11,7 +12,7 @@ function Article(props) {
     <div className="article">
       <a href={props.data.link}>
         <button className={"articleHeading"} style={{ width: "100%" }}>
-          <small>{props.data.pubDate}</small>
+          <small>{dateTransformer(props.data.isoDate)}</small>
           <h3>{props.data.title}</h3>
           <small
             style={{

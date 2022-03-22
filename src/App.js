@@ -38,16 +38,26 @@ function App() {
           item.read = false;
           item.feed = feed.title;
         });
-        dataStore((prevState) => [...prevState, feed]);
 
-        // for (leti=0; i<feed.items.length; i++){
-        //   let feedName = feed.name
-        //   if (feed.items[i]===data) {
+        feed.items = feed.items.slice(0, 50);
 
-        //   }
-        // }
+        dataStore((prevState) =>
+          [...prevState, feed].sort((a, b) =>
+            a.title > b.title ? 1 : b.title > a.title ? -1 : 0
+          )
+        );
 
-        setAllItems((prevState) => [...prevState, ...feed.items]);
+        // dataStore(
+        //   (prevState) =>
+        //     ([...prevState][0].items = [...prevState[0].items, ...feed.items])
+        // );
+
+        setAllItems((prevState) =>
+          [...prevState, ...feed.items].sort((a, b) =>
+            a.isoDate < b.isoDate ? 1 : b.isoDate < a.isoDate ? -1 : 0
+          )
+        );
+
         setLoading(false);
       } catch (e) {
         errorStore((prevState) => [...prevState, [feedName, e]]);
@@ -67,10 +77,10 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rssFeeds]);
 
-  console.log(allItems);
+  // console.log(data);
 
   // Set first article of first feed to read on load
-  if (!loading) data[0].items[0].read = true;
+  // if (!loading) allItems[0].read = true;
 
   return (
     <div>

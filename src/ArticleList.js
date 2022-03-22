@@ -1,4 +1,5 @@
 import React from "react";
+import dateTransformer from "./dateTransformer";
 
 const ArticleList = (props) => {
   // const htmlString = props.data.content;
@@ -23,6 +24,19 @@ const ArticleList = (props) => {
           <div
             style={{
               fontVariant: "small-caps",
+              fontSize: "smaller",
+              // fontWeight: "bold",
+              color: "gray",
+              padding: "0px",
+              margin: "0px",
+              float: "right",
+            }}
+          >
+            {dateTransformer(props.data.isoDate)}
+          </div>
+          <div
+            style={{
+              fontVariant: "small-caps",
               fontSize: "small",
               fontWeight: "bold",
               color: "gray",
@@ -30,6 +44,7 @@ const ArticleList = (props) => {
           >
             {props.data.feed}
           </div>
+
           <p className="listTitle">{props.data.title}</p>
           {/* <p>{props.data.pubDate.toString()}</p> */}
           <p className="listSnippet">
