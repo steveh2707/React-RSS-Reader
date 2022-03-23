@@ -19,6 +19,7 @@ const Container = (props) => {
   const [selectedFeed, setSelectedFeed] = useState(-1);
   const [modal, setModal] = useState(false);
   const [isOpenFeeds] = useState(true);
+  const [alertOpen, setAlertOpen] = useState(true);
   // const [isOpenArticles] = useState(true);
 
   // useEffect(() => {
@@ -57,12 +58,14 @@ const Container = (props) => {
           ))}
           {props.errors.length === 0 ? null : (
             <Alert
+              isOpen={alertOpen}
+              toggle={() => setAlertOpen(false)}
               style={{
                 textAlign: "center",
                 fontSize: "12px",
                 margin: "2px auto 2px auto",
-                height: "35px",
-                padding: "7px 20px 7px 20px",
+                // height: "35px",
+                // padding: "7px 20px 7px 20px",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
               }}
