@@ -19,6 +19,7 @@ const FeedList = (props) => {
           props.setSelectedFeed(props.index);
           props.setSelectedArticle(0);
           props.data.items[0].read = true;
+          props.setFullArticle(false);
         }}
       >
         <div

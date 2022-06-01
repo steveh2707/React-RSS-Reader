@@ -8,6 +8,12 @@ const ArticleList = (props) => {
     props.setSelectedArticle(props.index);
     props.data.read = true;
     // console.log(props.data);
+    props.setFullArticle(false);
+  }
+  function onDoubleClick() {
+    props.setSelectedArticle(props.index);
+    props.data.read = true;
+    props.setFullArticle(true);
   }
 
   // console.log(props.data);
@@ -18,6 +24,7 @@ const ArticleList = (props) => {
         props.selectedArticle === props.index ? "articleListSelected" : ""
       }`}
       onClick={onClick}
+      onDoubleClick={onDoubleClick}
     >
       <div>
         <div>

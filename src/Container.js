@@ -12,6 +12,7 @@ import {
   Collapse,
 } from "reactstrap";
 import Loading from "./Loading";
+import MercuryParser from "./MercuryParser";
 
 const Container = (props) => {
   const { data } = props;
@@ -20,6 +21,7 @@ const Container = (props) => {
   const [modal, setModal] = useState(false);
   const [isOpenFeeds] = useState(true);
   const [alertOpen, setAlertOpen] = useState(true);
+  const [fullArticle, setFullArticle] = useState(false);
   // const [isOpenArticles] = useState(true);
 
   // useEffect(() => {
@@ -44,6 +46,7 @@ const Container = (props) => {
             selectedFeed={selectedFeed}
             setSelectedFeed={setSelectedFeed}
             setSelectedArticle={setSelectedArticle}
+            setFullArticle={setFullArticle}
           />
           <br />
           {data.map((item, index) => (
@@ -54,6 +57,7 @@ const Container = (props) => {
               selectedFeed={selectedFeed}
               setSelectedFeed={setSelectedFeed}
               setSelectedArticle={setSelectedArticle}
+              setFullArticle={setFullArticle}
             />
           ))}
           {props.errors.length === 0 ? null : (
@@ -103,6 +107,7 @@ const Container = (props) => {
                   index={index}
                   selectedArticle={selectedArticle}
                   setSelectedArticle={setSelectedArticle}
+                  setFullArticle={setFullArticle}
                 />
               ))
             : data[selectedFeed].items.map((item, index) => (
@@ -113,6 +118,7 @@ const Container = (props) => {
                   index={index}
                   selectedArticle={selectedArticle}
                   setSelectedArticle={setSelectedArticle}
+                  setFullArticle={setFullArticle}
                 />
               ))}
         </div>
@@ -126,11 +132,22 @@ const Container = (props) => {
     } else {
       return (
         <div>
-          {selectedFeed === -1 ? (
-            <Article data={props.allItems[selectedArticle]} />
-          ) : (
-            <Article data={data[selectedFeed].items[selectedArticle]} />
-          )}
+          {
+            selectedFeed === -1 ? (
+              fullArticle ? (
+                <MercuryParser data={props.allItems[selectedArticle]} />
+              ) : (
+                <Article data={props.allItems[selectedArticle]} />
+              )
+            ) : fullArticle ? (
+              <MercuryParser data={data[selectedFeed].items[selectedArticle]} />
+            ) : (
+              <Article data={data[selectedFeed].items[selectedArticle]} />
+            )
+            // <Article data={props.allItems[selectedArticle]} />
+            // <MercuryParser data={props.allItems[selectedArticle]} />
+            // <Article data={data[selectedFeed].items[selectedArticle]} />
+          }
           {/* <Article data={data[selectedFeed].items[selectedArticle]} /> */}
         </div>
       );

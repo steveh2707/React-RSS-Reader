@@ -9,22 +9,22 @@ function App() {
   const [data, setData] = useState([]);
   const [rssInput, setRssInput] = useState("");
   const [rssFeeds, setRssFeeds] = useState([
-    "fd",
-    "dsgf",
-    "x",
-    "check",
-    "fake",
+    // "fd",
+    // "dsgf",
+    // "x",
+    // "check",
+    // "fake",
     "https://www.theverge.com/rss/index.xml",
     "https://thewirecutter.com/feed/",
     "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
-    "https://rss.art19.com/apology-line",
-    "https://feeds.simplecast.com/54nAGcIl",
-    "https://feeds.megaphone.fm/ADL9840290619",
-    "https://www.eonline.com/syndication/feeds/rssfeeds/topstories.xml",
+    // "https://rss.art19.com/apology-line",
+    // "https://feeds.simplecast.com/54nAGcIl",
+    // "https://feeds.megaphone.fm/ADL9840290619",
+    // "https://www.eonline.com/syndication/feeds/rssfeeds/topstories.xml",
     // "http://www.tmz.com/rss",
-    "test",
-    "fake link",
-    "frf",
+    // "test",
+    // "fake link",
+    // "frf",
   ]);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState([]);
