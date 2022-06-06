@@ -17,6 +17,9 @@ const ArticleList = (props) => {
   }
 
   // console.log(props.data);
+  // if (props.data.content.includes("img")) {
+  //   console.log(props.data.content.match(/\<img(.*?)\/>/i)[0]);
+  // }
 
   return (
     <button
@@ -57,6 +60,18 @@ const ArticleList = (props) => {
           <p className="listSnippet">
             {props.data.contentSnippet.substring(0, 150)}...
           </p>
+
+          {props.data.content.includes("img") ? (
+            <div
+              dangerouslySetInnerHTML={{
+                //eslint-disable-next-line
+                __html: props.data.content.match(/\<img(.*?)\/>/i)[0],
+              }}
+            />
+          ) : (
+            ""
+          )}
+
           {/* <a className="listLink" href={props.data.link}>
             Continue Reading
           </a> */}

@@ -41,8 +41,6 @@ function MercuryParser(props) {
         </button>
       </a>
 
-      <img src={content.lead_image_url} alt="new" />
-
       <div
         className="articleBody"
         dangerouslySetInnerHTML={{
