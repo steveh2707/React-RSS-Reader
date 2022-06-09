@@ -11,28 +11,20 @@ function HeaderButtons(props) {
   function showReaderView() {
     props.setFullArticle(!props.fullArticle);
   }
-  // function markUnread() {
-
-  // }
+  function markUnread() {
+    props.currentArticle.read = false;
+  }
 
   return (
     <div style={{ textAlign: "right", marginRight: "20px" }}>
-      <IconButton aria-label="Show Reader View">
-        <ArticleIcon sx={iconSize} onClick={showReaderView} color={colour} />
+      <IconButton aria-label="Show Reader View" onClick={showReaderView}>
+        <ArticleIcon sx={iconSize} color={colour} />
       </IconButton>
-      <IconButton aria-label="Mark as Unread">
-        <CircleOutlinedIcon
-          sx={iconSize}
-          onClick={() => console.log("working")}
-          color={colour}
-        />
+      <IconButton aria-label="Mark as Unread" onClick={markUnread}>
+        <CircleOutlinedIcon sx={iconSize} color={colour} />
       </IconButton>
-      <IconButton aria-label="Star">
-        <StarBorderOutlinedIcon
-          sx={iconSize}
-          onClick={() => console.log("working")}
-          color={colour}
-        />
+      <IconButton aria-label="Star" onClick={() => console.log("working")}>
+        <StarBorderOutlinedIcon sx={iconSize} color={colour} />
       </IconButton>
     </div>
   );

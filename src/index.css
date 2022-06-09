@@ -97,6 +97,10 @@ h1 {
   text-align: center;
 }
 
+h4 {
+  line-height: inherit;
+}
+
 img {
   /* display: block; */
   /* margin-left: auto;
@@ -131,8 +135,8 @@ a {
 
 .FeedList {
   border-radius: 10px;
-  padding: 7px 20px;
-  margin: 2px 5px;
+  padding: 5px 20px;
+  margin: 1px 5px;
   background-color: #161616;
   color: #ffffff;
   text-align: left;
@@ -163,6 +167,7 @@ a {
   border: 0px;
   /* border: 2px solid #000000; */
   border-radius: 5px;
+  width: 100%;
 }
 
 .articleListSelected {

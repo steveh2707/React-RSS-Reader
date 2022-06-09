@@ -3,37 +3,31 @@ import ArticleList from "./ArticleList";
 import Article from "./Article";
 import FeedList from "./FeedList";
 import { Alert } from "reactstrap";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  // Collapse,
-} from "reactstrap";
 import Loading from "./Loading";
 import MercuryParser from "./MercuryParser";
 import HeaderButtons from "./HeaderButtons";
+import AddRSSFeed from "./AddRSSFeed";
 
 const Container = (props) => {
   const { data } = props;
   const [selectedArticle, setSelectedArticle] = useState(0);
   const [selectedFeed, setSelectedFeed] = useState(-1);
-  const [modal, setModal] = useState(false);
-  // const [isOpenFeeds] = useState(true);
   const [alertOpen, setAlertOpen] = useState(true);
   const [fullArticle, setFullArticle] = useState(false);
-  // const [isOpenArticles] = useState(true);
 
-  // useEffect(() => {
-  //   function handleResize() {
-  //     console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
-  //   }
-  //   window.addEventListener("resize", handleResize);
-  // });
+  let currentArticle = {};
+  let currentArticleList = {};
+  let heading = "";
 
-  // console.log(data);
-  // console.log(props.allItems);
+  if (selectedFeed === -1) {
+    currentArticle = props.allItems[selectedArticle];
+    currentArticleList = props.allItems;
+    heading = "All Feeds";
+  } else {
+    currentArticle = data[selectedFeed].items[selectedArticle];
+    currentArticleList = data[selectedFeed].items;
+    heading = props.data[selectedFeed].title;
+  }
 
   function loadFeedList() {
     if (props.loading) {
@@ -90,38 +84,17 @@ const Container = (props) => {
     } else if (!props.loading) {
       return (
         <div>
-          {/* <br /> */}
-          {/* {selectedFeed === -1 ? (
-            <h3 style={{ fontVariant: "small-caps" }}>All Feeds</h3>
-          ) : (
-            <h3 style={{ fontVariant: "small-caps" }}>
-              {props.data[selectedFeed].title}
-            </h3>
-          )} */}
-
-          {selectedFeed === -1
-            ? props.allItems.map((item, index) => (
-                <ArticleList
-                  allArticles={data}
-                  data={item}
-                  key={index}
-                  index={index}
-                  selectedArticle={selectedArticle}
-                  setSelectedArticle={setSelectedArticle}
-                  setFullArticle={setFullArticle}
-                />
-              ))
-            : data[selectedFeed].items.map((item, index) => (
-                <ArticleList
-                  allArticles={data}
-                  data={item}
-                  key={index}
-                  index={index}
-                  selectedArticle={selectedArticle}
-                  setSelectedArticle={setSelectedArticle}
-                  setFullArticle={setFullArticle}
-                />
-              ))}
+          {currentArticleList.map((item, index) => (
+            <ArticleList
+              allArticles={data}
+              data={item}
+              key={index}
+              index={index}
+              selectedArticle={selectedArticle}
+              setSelectedArticle={setSelectedArticle}
+              setFullArticle={setFullArticle}
+            />
+          ))}
         </div>
       );
     }
@@ -133,109 +106,36 @@ const Container = (props) => {
     } else {
       return (
         <div>
-          {
-            selectedFeed === -1 ? (
-              fullArticle ? (
-                <MercuryParser data={props.allItems[selectedArticle]} />
-              ) : (
-                <Article data={props.allItems[selectedArticle]} />
-              )
-            ) : fullArticle ? (
-              <MercuryParser data={data[selectedFeed].items[selectedArticle]} />
-            ) : (
-              <Article data={data[selectedFeed].items[selectedArticle]} />
-            )
-            // <Article data={props.allItems[selectedArticle]} />
-            // <MercuryParser data={props.allItems[selectedArticle]} />
-            // <Article data={data[selectedFeed].items[selectedArticle]} />
-          }
-          {/* <Article data={data[selectedFeed].items[selectedArticle]} /> */}
+          {fullArticle ? (
+            <MercuryParser data={currentArticle} />
+          ) : (
+            <Article data={currentArticle} />
+          )}
         </div>
       );
     }
   }
 
-  function onSubmit(e) {
-    e.preventDefault();
-    props.setRssFeeds((prevState) => [...prevState, props.rssInput]);
-    setModal(false);
-  }
-
   return (
     <div className="full-page-grid">
-      {/* <Collapse isOpen={isOpenFeeds}> */}
       <div className="grid-header-left"></div>
+
       <div className="grid-header-middle">
-        {selectedFeed === -1 ? (
-          <h3
-            style={{
-              // fontVariant: "small-caps",
-              lineHeight: "inherit",
-            }}
-          >
-            All Feeds
-          </h3>
-        ) : (
-          <h4
-            style={{
-              // fontVariant: "small-caps",
-              lineHeight: "inherit",
-            }}
-          >
-            {props.data[selectedFeed].title}
-          </h4>
-        )}
+        <h4>{heading}</h4>
       </div>
+
       <div className="grid-header-right">
         <HeaderButtons
           setFullArticle={setFullArticle}
           fullArticle={fullArticle}
+          currentArticle={currentArticle}
         />
       </div>
 
       <div className="grid-content-left">
-        {/* <br /> */}
-        {/* <h2
-          style={{
-            textAlign: "center",
-            marginBottom: "15px",
-            fontVariant: "small-caps",
-          }}
-        >
-          Feeds
-        </h2> */}
-
         {loadFeedList()}
-        <button
-          className="FeedList"
-          style={{ textAlign: "center" }}
-          onClick={() => setModal(!modal)}
-        >
-          Add New Feed
-        </button>
-
-        <Modal isOpen={modal} toggle={() => setModal(!modal)}>
-          <ModalHeader toggle={() => setModal(!modal)}>
-            Input RSS Feed
-          </ModalHeader>
-          <form onSubmit={onSubmit}>
-            <ModalBody>
-              <input
-                style={{ width: "450px" }}
-                value={props.rssInput}
-                type="string"
-                name="rssFeedInput"
-                placeholder="Enter feed url"
-                onChange={(event) => props.setRssInput(event.target.value)}
-              />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary">Add</Button>
-            </ModalFooter>
-          </form>
-        </Modal>
+        <AddRSSFeed />
       </div>
-      {/* </Collapse> */}
 
       <div className="grid-content-middle">{loadArticleList()}</div>
 
