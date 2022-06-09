@@ -16,7 +16,80 @@ code {
     monospace;
 }
 
-/* Grid View */
+/* Full Page Grid View */
+
+.full-page-grid {
+  height: 100vh;
+  display: grid;
+  grid-template: 40px auto 20px / 20% 35% auto;
+  background-color: black;
+  column-gap: 10px;
+  row-gap: 10px;
+  background-color: #161616;
+  color: #ffffff;
+}
+
+.grid-header-left {
+  /* background-color: blue; */
+}
+
+.grid-header-middle {
+  /* background-color: red; */
+  /* height: 110px; */
+  line-height: 40px;
+}
+
+.grid-header-right {
+  /* background-color: yellow; */
+}
+
+.grid-content-left {
+  /* background-color: green; */
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.grid-content-middle {
+  /* background-color: hotpink; */
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.grid-content-middle:hover {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.grid-content-right {
+  /* background-color: orange; */
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.grid-content-right:hover {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Article List Flex View */
+
+.flex-article {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  justify-content: space-between;
+}
+
+.flex-article-text {
+  flex-basis: 73%;
+  height: fit-content;
+}
+
+.flex-article-image {
+  flex-basis: 25%;
+  max-width: inherit;
+}
 
 h1 {
   margin: 0px;
@@ -30,6 +103,7 @@ img {
   margin-right: auto; */
   width: 100%;
   border-radius: 5px;
+  height: 100%;
 }
 
 figure {
@@ -47,24 +121,24 @@ a {
   color: #8ab4f8;
 }
 
-.background {
+/* .background {
   background-color: #161616;
   color: #ffffff;
   margin: 0px;
   padding: 0px 20px 0px 20px;
   height: 100vh;
-}
+} */
 
 .FeedList {
   border-radius: 10px;
-  padding: 7px 20px 7px 20px;
-  margin: 2px auto 2px auto;
+  padding: 7px 20px;
+  margin: 2px 5px;
   background-color: #161616;
   color: #ffffff;
   text-align: left;
   border: 0px;
   border-radius: 5px;
-  width: 100%;
+  width: 95%;
   font-weight: bold;
   font-size: 12px;
   height: 35px;
@@ -105,45 +179,45 @@ a {
 
 .article {
   border-radius: 10px;
-  padding: 10px 20px 10px 20px;
-  margin: 12px auto 2px auto;
+  padding: 0px 20px 10px 20px;
+  margin: 0px auto;
   color: #ffffff;
   max-width: 1000px;
 }
 
-.columnNav {
+/* .columnNav {
   height: inherit;
   width: 16%;
   float: left;
   overflow: hidden;
   scrollbar-gutter: stable;
-}
+} */
 
 .columnNav:hover {
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.columnArticleList {
+/* .columnArticleList {
   height: inherit;
   width: 40%;
   float: left;
   overflow: hidden;
   scrollbar-gutter: stable;
-}
+} */
 
 .columnArticleList:hover {
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.columnArticle {
+/* .columnArticle {
   height: inherit;
   width: 40%;
   float: left;
   overflow: hidden;
   scrollbar-gutter: stable;
-}
+} */
 
 .columnArticle:hover {
   overflow-x: hidden;
@@ -177,7 +251,7 @@ a {
 .articleHeading {
   border-radius: 10px;
   padding: 10px 10px 10px 10px;
-  margin: 2px auto 2px auto;
+  margin: 0px auto;
   background-color: #161616;
   color: #ffffff;
   text-align: left;

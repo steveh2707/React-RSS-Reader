@@ -29,7 +29,7 @@ const ArticleList = (props) => {
       onClick={onClick}
       onDoubleClick={onDoubleClick}
     >
-      <div>
+      <div className="article-grid">
         <div>
           <div
             style={{
@@ -44,6 +44,7 @@ const ArticleList = (props) => {
           >
             {dateTransformer(props.data.isoDate)}
           </div>
+
           <div
             style={{
               fontVariant: "small-caps",
@@ -55,26 +56,35 @@ const ArticleList = (props) => {
             {props.data.feed}
           </div>
 
-          <p className="listTitle">{props.data.title}</p>
-          {/* <p>{props.data.pubDate.toString()}</p> */}
-          <p className="listSnippet">
-            {props.data.contentSnippet.substring(0, 150)}...
-          </p>
-
-          {props.data.content.includes("img") ? (
-            <div
-              dangerouslySetInnerHTML={{
-                //eslint-disable-next-line
-                __html: props.data.content.match(/\<img(.*?)\/>/i)[0],
-              }}
-            />
-          ) : (
-            ""
-          )}
-
-          {/* <a className="listLink" href={props.data.link}>
-            Continue Reading
-          </a> */}
+          <div className="flex-article-image">
+            {props.data.content.includes("img") ? (
+              <div className="flex-article">
+                <div className="flex-article-text">
+                  <p className="listTitle">{props.data.title}</p>
+                  {/* <p>{props.data.pubDate.toString()}</p> */}
+                  <p className="listSnippet">
+                    {props.data.contentSnippet.substring(0, 110)}...
+                  </p>
+                </div>
+                <div className="flex-article-image">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      //eslint-disable-next-line
+                      __html: props.data.content.match(/\<img(.*?)\/>/i)[0],
+                    }}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div>
+                <p className="listTitle">{props.data.title}</p>
+                {/* <p>{props.data.pubDate.toString()}</p> */}
+                <p className="listSnippet">
+                  {props.data.contentSnippet.substring(0, 140)}...
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </button>

@@ -9,17 +9,18 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Collapse,
+  // Collapse,
 } from "reactstrap";
 import Loading from "./Loading";
 import MercuryParser from "./MercuryParser";
+import HeaderButtons from "./HeaderButtons";
 
 const Container = (props) => {
   const { data } = props;
   const [selectedArticle, setSelectedArticle] = useState(0);
   const [selectedFeed, setSelectedFeed] = useState(-1);
   const [modal, setModal] = useState(false);
-  const [isOpenFeeds] = useState(true);
+  // const [isOpenFeeds] = useState(true);
   const [alertOpen, setAlertOpen] = useState(true);
   const [fullArticle, setFullArticle] = useState(false);
   // const [isOpenArticles] = useState(true);
@@ -89,14 +90,14 @@ const Container = (props) => {
     } else if (!props.loading) {
       return (
         <div>
-          <br />
-          {selectedFeed === -1 ? (
+          {/* <br /> */}
+          {/* {selectedFeed === -1 ? (
             <h3 style={{ fontVariant: "small-caps" }}>All Feeds</h3>
           ) : (
             <h3 style={{ fontVariant: "small-caps" }}>
               {props.data[selectedFeed].title}
             </h3>
-          )}
+          )} */}
 
           {selectedFeed === -1
             ? props.allItems.map((item, index) => (
@@ -161,58 +162,84 @@ const Container = (props) => {
   }
 
   return (
-    <div className="background">
-      <Collapse isOpen={isOpenFeeds}>
-        <div className="columnNav">
-          <br />
-          <h2
+    <div className="full-page-grid">
+      {/* <Collapse isOpen={isOpenFeeds}> */}
+      <div className="grid-header-left"></div>
+      <div className="grid-header-middle">
+        {selectedFeed === -1 ? (
+          <h3
             style={{
-              textAlign: "center",
-              marginBottom: "15px",
-              fontVariant: "small-caps",
+              // fontVariant: "small-caps",
+              lineHeight: "inherit",
             }}
           >
-            Feeds
-          </h2>
-
-          {loadFeedList()}
-          <button
-            className="FeedList"
-            style={{ textAlign: "center" }}
-            onClick={() => setModal(!modal)}
+            All Feeds
+          </h3>
+        ) : (
+          <h4
+            style={{
+              // fontVariant: "small-caps",
+              lineHeight: "inherit",
+            }}
           >
-            Add New Feed
-          </button>
+            {props.data[selectedFeed].title}
+          </h4>
+        )}
+      </div>
+      <div className="grid-header-right">
+        <HeaderButtons
+          setFullArticle={setFullArticle}
+          fullArticle={fullArticle}
+        />
+      </div>
 
-          <Modal isOpen={modal} toggle={() => setModal(!modal)}>
-            <ModalHeader toggle={() => setModal(!modal)}>
-              Input RSS Feed
-            </ModalHeader>
-            <form onSubmit={onSubmit}>
-              <ModalBody>
-                <input
-                  style={{ width: "450px" }}
-                  value={props.rssInput}
-                  type="string"
-                  name="rssFeedInput"
-                  placeholder="Enter feed url"
-                  onChange={(event) => props.setRssInput(event.target.value)}
-                />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary">Add</Button>
-              </ModalFooter>
-            </form>
-          </Modal>
-        </div>
-        <div className="columnSpace"></div>
-      </Collapse>
+      <div className="grid-content-left">
+        {/* <br /> */}
+        {/* <h2
+          style={{
+            textAlign: "center",
+            marginBottom: "15px",
+            fontVariant: "small-caps",
+          }}
+        >
+          Feeds
+        </h2> */}
 
-      <div className="columnArticleList">{loadArticleList()}</div>
+        {loadFeedList()}
+        <button
+          className="FeedList"
+          style={{ textAlign: "center" }}
+          onClick={() => setModal(!modal)}
+        >
+          Add New Feed
+        </button>
 
-      <div className="columnSpace"></div>
+        <Modal isOpen={modal} toggle={() => setModal(!modal)}>
+          <ModalHeader toggle={() => setModal(!modal)}>
+            Input RSS Feed
+          </ModalHeader>
+          <form onSubmit={onSubmit}>
+            <ModalBody>
+              <input
+                style={{ width: "450px" }}
+                value={props.rssInput}
+                type="string"
+                name="rssFeedInput"
+                placeholder="Enter feed url"
+                onChange={(event) => props.setRssInput(event.target.value)}
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary">Add</Button>
+            </ModalFooter>
+          </form>
+        </Modal>
+      </div>
+      {/* </Collapse> */}
 
-      <div className="columnArticle">{loadArticle()}</div>
+      <div className="grid-content-middle">{loadArticleList()}</div>
+
+      <div className="grid-content-right">{loadArticle()}</div>
     </div>
   );
 };
