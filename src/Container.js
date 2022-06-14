@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import ArticleList from "./ArticleList";
+import ArticleListItem from "./ArticleListItem";
 import Article from "./Article";
-import FeedList from "./FeedList";
-import { Alert } from "reactstrap";
-import Loading from "./Loading";
+// import FeedListItem from "./FeedListItem";
+// import { Alert } from "reactstrap";
+// import Loading from "./Loading";
 import MercuryParser from "./MercuryParser";
-import HeaderButtons from "./HeaderButtons";
+import ButtonsHeader from "./ButtonsHeader";
 import AddRSSFeed from "./AddRSSFeed";
+import FeedList from "./FeedList";
+import Loading from "./Loading";
+import ButtonsFooterList from "./ButtonsFooterList";
+import ButtonsFooterArticle from "./ButtonsFooterArticle";
 
 const Container = (props) => {
-  const { data } = props;
+  const { data, allItems, loading } = props;
   const [selectedArticle, setSelectedArticle] = useState(0);
   const [selectedFeed, setSelectedFeed] = useState(-1);
   const [alertOpen, setAlertOpen] = useState(true);
@@ -20,8 +24,8 @@ const Container = (props) => {
   let heading = "";
 
   if (selectedFeed === -1) {
-    currentArticle = props.allItems[selectedArticle];
-    currentArticleList = props.allItems;
+    currentArticle = allItems[selectedArticle];
+    currentArticleList = allItems;
     heading = "All Feeds";
   } else {
     currentArticle = data[selectedFeed].items[selectedArticle];
@@ -29,63 +33,50 @@ const Container = (props) => {
     heading = props.data[selectedFeed].title;
   }
 
-  function loadFeedList() {
-    if (props.loading) {
-      return <Loading />;
-    } else {
-      return (
-        <div>
-          <FeedList
-            data={{ title: "All Feeds", items: props.allItems }}
-            index={-1}
-            selectedFeed={selectedFeed}
-            setSelectedFeed={setSelectedFeed}
-            setSelectedArticle={setSelectedArticle}
+  if (loading) {
+    return (
+      <div>
+        <Loading className="buttons" />
+      </div>
+    );
+  } else {
+    return (
+      <div className="full-page-grid">
+        <div className="grid-header-left"></div>
+
+        <div className="grid-header-middle">
+          <h4>{heading}</h4>
+        </div>
+
+        <div className="grid-header-right">
+          <ButtonsHeader
             setFullArticle={setFullArticle}
+            fullArticle={fullArticle}
+            currentArticle={currentArticle}
           />
-          <br />
-          {data.map((item, index) => (
+        </div>
+
+        <div className="grid-content-left">
+          {
             <FeedList
-              data={item}
-              key={index}
-              index={index}
+              loading={loading}
+              data={data}
+              allItems={allItems}
               selectedFeed={selectedFeed}
               setSelectedFeed={setSelectedFeed}
               setSelectedArticle={setSelectedArticle}
               setFullArticle={setFullArticle}
+              alertOpen={alertOpen}
+              setAlertOpen={setAlertOpen}
+              errors={props.errors}
             />
-          ))}
-          {props.errors.length === 0 ? null : (
-            <Alert
-              isOpen={alertOpen}
-              toggle={() => setAlertOpen(false)}
-              style={{
-                textAlign: "center",
-                fontSize: "12px",
-                margin: "2px auto 2px auto",
-                // height: "35px",
-                // padding: "7px 20px 7px 20px",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-              }}
-              color="danger"
-            >
-              Unable to load {props.errors.length} feeds
-            </Alert>
-          )}
+          }
+          <AddRSSFeed />
         </div>
-      );
-    }
-  }
 
-  function loadArticleList() {
-    if (props.loading) {
-      return <div></div>;
-    } else if (!props.loading) {
-      return (
-        <div>
+        <div className="grid-content-middle">
           {currentArticleList.map((item, index) => (
-            <ArticleList
+            <ArticleListItem
               allArticles={data}
               data={item}
               key={index}
@@ -96,52 +87,31 @@ const Container = (props) => {
             />
           ))}
         </div>
-      );
-    }
-  }
 
-  function loadArticle() {
-    if (props.loading) {
-      return <div></div>;
-    } else {
-      return (
-        <div>
+        <div className="grid-content-right">
           {fullArticle ? (
             <MercuryParser data={currentArticle} />
           ) : (
             <Article data={currentArticle} />
           )}
         </div>
-      );
-    }
+
+        <div className="grid-footer-left"></div>
+
+        <div className="grid-footer-middle">
+          <ButtonsFooterList />
+        </div>
+
+        <div className="grid-footer-right">
+          <ButtonsFooterArticle
+            selectedArticle={selectedArticle}
+            setSelectedArticle={setSelectedArticle}
+            currentArticle={currentArticle}
+          />
+        </div>
+      </div>
+    );
   }
-
-  return (
-    <div className="full-page-grid">
-      <div className="grid-header-left"></div>
-
-      <div className="grid-header-middle">
-        <h4>{heading}</h4>
-      </div>
-
-      <div className="grid-header-right">
-        <HeaderButtons
-          setFullArticle={setFullArticle}
-          fullArticle={fullArticle}
-          currentArticle={currentArticle}
-        />
-      </div>
-
-      <div className="grid-content-left">
-        {loadFeedList()}
-        <AddRSSFeed />
-      </div>
-
-      <div className="grid-content-middle">{loadArticleList()}</div>
-
-      <div className="grid-content-right">{loadArticle()}</div>
-    </div>
-  );
 };
 
 export default Container;

@@ -4,9 +4,8 @@ import ArticleIcon from "@mui/icons-material/ArticleRounded";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 
-function HeaderButtons(props) {
-  let iconSize = { fontSize: 30 };
-  let colour = "primary";
+function ButtonsHeader(props) {
+  let iconSize = { fontSize: 28 };
 
   function showReaderView() {
     props.setFullArticle(!props.fullArticle);
@@ -18,16 +17,16 @@ function HeaderButtons(props) {
   return (
     <div style={{ textAlign: "right", marginRight: "20px" }}>
       <IconButton aria-label="Show Reader View" onClick={showReaderView}>
-        <ArticleIcon sx={iconSize} color={colour} />
+        <ArticleIcon sx={iconSize} className="buttons" />
       </IconButton>
       <IconButton aria-label="Mark as Unread" onClick={markUnread}>
-        <CircleOutlinedIcon sx={iconSize} color={colour} />
+        <CircleOutlinedIcon sx={iconSize} className="buttons" />
       </IconButton>
       <IconButton aria-label="Star" onClick={() => console.log("working")}>
-        <StarBorderOutlinedIcon sx={iconSize} color={colour} />
+        <StarBorderOutlinedIcon sx={iconSize} className="buttons" />
       </IconButton>
     </div>
   );
 }
 
-export default HeaderButtons;
+export default ButtonsHeader;

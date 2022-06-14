@@ -1,3 +1,11 @@
+:root {
+  --background: #161616;
+  --backgroundLeft: #1d1d1d;
+  --textColour: #ffffff;
+  --secondaryTextColour: gray;
+  --selectedHighlight: #252525;
+}
+
 body {
   margin: 0px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -7,8 +15,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding: 0px;
   height: 100%;
-  /* overflow: overlay; */
-  /* scrollbar-gutter: auto; */
 }
 
 code {
@@ -16,21 +22,27 @@ code {
     monospace;
 }
 
+.full-page {
+  background-color: var(--background);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
 /* Full Page Grid View */
 
 .full-page-grid {
   height: 100vh;
   display: grid;
-  grid-template: 40px auto 20px / 20% 35% auto;
-  background-color: black;
+  grid-template: 40px auto 40px / 17% 37% auto;
   column-gap: 10px;
-  row-gap: 10px;
-  background-color: #161616;
-  color: #ffffff;
+  row-gap: 0px;
+  background-color: var(--background);
+  color: var(--textColour);
 }
 
 .grid-header-left {
-  /* background-color: blue; */
+  background-color: var(--backgroundLeft);
 }
 
 .grid-header-middle {
@@ -47,6 +59,7 @@ code {
   /* background-color: green; */
   overflow: hidden;
   scrollbar-gutter: stable;
+  background-color: var(--backgroundLeft);
 }
 
 .grid-content-middle {
@@ -71,6 +84,14 @@ code {
   overflow-y: auto;
 }
 
+.grid-footer-left {
+  background-color: var(--backgroundLeft);
+}
+
+.grid-footer-middle {
+  /* background-color: yellow; */
+}
+
 /* Article List Flex View */
 
 .flex-article {
@@ -89,6 +110,12 @@ code {
 .flex-article-image {
   flex-basis: 25%;
   max-width: inherit;
+}
+
+/* General CSS */
+
+.buttons {
+  color: var(--textColour);
 }
 
 h1 {
@@ -118,155 +145,108 @@ figure {
 figcaption {
   font-size: small;
   text-align: center;
-  color: gray;
+  color: var(--secondaryTextColour);
 }
 
 a {
   color: #8ab4f8;
 }
 
-/* .background {
-  background-color: #161616;
-  color: #ffffff;
-  margin: 0px;
-  padding: 0px 20px 0px 20px;
-  height: 100vh;
-} */
-
 .FeedList {
   border-radius: 10px;
-  padding: 5px 20px;
+  padding: 5px 10px 5px 15px;
   margin: 1px 5px;
-  background-color: #161616;
-  color: #ffffff;
+  background-color: var(--backgroundLeft);
+  color: var(--textColour);
   text-align: left;
   border: 0px;
   border-radius: 5px;
-  width: 95%;
+  width: 97%;
   font-weight: bold;
   font-size: 12px;
-  height: 35px;
   overflow: hidden;
 }
 
 .FeedListSelected {
-  background-color: #252525;
+  background-color: var(--selectedHighlight);
 }
 
 .FeedList:active {
-  background-color: #252525;
+  background-color: var(--selectedHighlight);
 }
 
 .articleList {
   border-radius: 10px;
   padding: 10px 20px 10px 20px;
   margin: 2px auto 2px auto;
-  background-color: #161616;
-  color: #ffffff;
+  background-color: var(--background);
+  color: var(--textColour);
   text-align: left;
   border: 0px;
-  /* border: 2px solid #000000; */
   border-radius: 5px;
   width: 100%;
 }
 
 .articleListSelected {
-  background-color: #252525;
+  background-color: var(--selectedHighlight);
 }
 
 .articleList:active {
-  background-color: #252525;
+  background-color: var(--selectedHighlight);
 }
 
 .articleListRead {
-  color: gray;
+  color: var(--secondaryTextColour);
 }
 
 .article {
   border-radius: 10px;
   padding: 0px 20px 10px 20px;
   margin: 0px auto;
-  color: #ffffff;
+  color: var(--textColour);
   max-width: 1000px;
 }
 
-/* .columnNav {
-  height: inherit;
-  width: 16%;
-  float: left;
-  overflow: hidden;
-  scrollbar-gutter: stable;
-} */
-
-.columnNav:hover {
-  overflow-x: hidden;
-  overflow-y: auto;
+.articleListFeedTitle {
+  font-variant: small-caps;
+  font-size: small;
+  font-weight: bold;
+  color: var(--secondaryTextColour);
 }
 
-/* .columnArticleList {
-  height: inherit;
-  width: 40%;
-  float: left;
-  overflow: hidden;
-  scrollbar-gutter: stable;
-} */
-
-.columnArticleList:hover {
-  overflow-x: hidden;
-  overflow-y: auto;
+.articleListDate {
+  font-variant: small-caps;
+  font-size: smaller;
+  color: var(--secondaryTextColour);
+  padding: 0px;
+  margin: 0px;
+  float: right;
 }
 
-/* .columnArticle {
-  height: inherit;
-  width: 40%;
-  float: left;
-  overflow: hidden;
-  scrollbar-gutter: stable;
-} */
-
-.columnArticle:hover {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.columnSpace {
-  height: 100vh;
-  width: 2%;
-  float: left;
-  overflow: hidden;
-  scrollbar-gutter: stable;
-}
-
-.columnSpace:hover {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.listTitle {
+.articleListTitle {
   font-weight: bolder;
   margin: 3px 0px;
 }
 
-.listSnippet {
+.articleListSnippet {
   margin: 3px 0px;
   font-size: small;
-  color: gray;
+  color: var(--secondaryTextColour);
 }
 
 .articleHeading {
   border-radius: 10px;
   padding: 10px 10px 10px 10px;
   margin: 0px auto;
-  background-color: #161616;
-  color: #ffffff;
+  background-color: var(--background);
+  color: var(--textColour);
   text-align: left;
   border: 0px;
-  /* border: 2px solid #000000; */
   border-radius: 5px;
 }
 
 .articleHeading:hover {
-  background-color: #252525;
+  background-color: var(--selectedHighlight);
 }
 
 .articleBody {
@@ -278,22 +258,6 @@ a {
   font-size: small;
 }
 
-/* body::-webkit-scrollbar {
-  width: 1em;
-}
-
-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
-} */
-
-/* ::-webkit-scrollbar {
-  width: 20px;
-} */
 ::-webkit-scrollbar {
   width: 5px;
 }

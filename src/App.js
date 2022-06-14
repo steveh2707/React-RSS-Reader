@@ -83,7 +83,7 @@ function App() {
   // if (!loading) allItems[0].read = true;
 
   return (
-    <div>
+    <div className="full-page">
       {rssFeeds.length === 0 ? (
         <div>Add a feed</div>
       ) : (

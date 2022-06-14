@@ -1,7 +1,7 @@
 import React from "react";
 import dateTransformer from "./dateTransformer";
 
-const ArticleList = (props) => {
+const ArticleListItem = (props) => {
   // const htmlString = props.data.content;
 
   function onClick() {
@@ -31,40 +31,20 @@ const ArticleList = (props) => {
     >
       <div className="article-grid">
         <div>
-          <div
-            style={{
-              fontVariant: "small-caps",
-              fontSize: "smaller",
-              // fontWeight: "bold",
-              color: "gray",
-              padding: "0px",
-              margin: "0px",
-              float: "right",
-            }}
-          >
+          <div className="articleListDate">
             {dateTransformer(props.data.isoDate)}
           </div>
 
-          <div
-            style={{
-              fontVariant: "small-caps",
-              fontSize: "small",
-              fontWeight: "bold",
-              color: "gray",
-            }}
-          >
-            {props.data.feed}
-          </div>
+          <div className="articleListFeedTitle">{props.data.feed}</div>
 
           <div className="flex-article-image">
             {props.data.content.includes("img") ? (
               <div className="flex-article">
                 <div className="flex-article-text">
-                  <p className="listTitle">{props.data.title}</p>
-                  {/* <p>{props.data.pubDate.toString()}</p> */}
-                  <p className="listSnippet">
+                  <div className="articleListTitle">{props.data.title}</div>
+                  <div className="articleListSnippet">
                     {props.data.contentSnippet.substring(0, 110)}...
-                  </p>
+                  </div>
                 </div>
                 <div className="flex-article-image">
                   <div
@@ -77,11 +57,10 @@ const ArticleList = (props) => {
               </div>
             ) : (
               <div>
-                <p className="listTitle">{props.data.title}</p>
-                {/* <p>{props.data.pubDate.toString()}</p> */}
-                <p className="listSnippet">
+                <div className="articleListTitle">{props.data.title}</div>
+                <div className="articleListSnippet">
                   {props.data.contentSnippet.substring(0, 140)}...
-                </p>
+                </div>
               </div>
             )}
           </div>
@@ -91,4 +70,4 @@ const ArticleList = (props) => {
   );
 };
 
-export default ArticleList;
+export default ArticleListItem;
