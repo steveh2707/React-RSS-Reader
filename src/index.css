@@ -51,9 +51,9 @@ code {
   line-height: 40px;
 }
 
-.grid-header-right {
-  /* background-color: yellow; */
-}
+/* .grid-header-right {
+  
+} */
 
 .grid-content-left {
   /* background-color: green; */
@@ -88,9 +88,8 @@ code {
   background-color: var(--backgroundLeft);
 }
 
-.grid-footer-middle {
-  /* background-color: yellow; */
-}
+/* .grid-footer-middle {
+} */
 
 /* Article List Flex View */
 
