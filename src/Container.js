@@ -11,6 +11,7 @@ import FeedList from "./FeedList";
 import Loading from "./Loading";
 import ButtonsFooterList from "./ButtonsFooterList";
 import ButtonsFooterArticle from "./ButtonsFooterArticle";
+import ButtonsHeaderFeeds from "./ButtonsHeaderFeeds";
 
 const Container = (props) => {
   const { data, allItems, loading } = props;
@@ -34,15 +35,13 @@ const Container = (props) => {
   }
 
   if (loading) {
-    return (
-      <div>
-        <Loading className="buttons" />
-      </div>
-    );
+    return <Loading />;
   } else {
     return (
       <div className="full-page-grid">
-        <div className="grid-header-left"></div>
+        <div className="grid-header-left">
+          <ButtonsHeaderFeeds />
+        </div>
 
         <div className="grid-header-middle">
           <h4>{heading}</h4>
@@ -107,6 +106,7 @@ const Container = (props) => {
             selectedArticle={selectedArticle}
             setSelectedArticle={setSelectedArticle}
             currentArticle={currentArticle}
+            setFullArticle={setFullArticle}
           />
         </div>
       </div>

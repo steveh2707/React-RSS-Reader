@@ -3,19 +3,9 @@ import { Spinner } from "reactstrap";
 
 const Loading = () => {
   return (
-    // <div className="background">
-    <div
-      style={{
-        position: "relative",
-        height: "inherit",
-        width: "inherit",
-        top: "40%",
-        left: "50%",
-      }}
-    >
+    <div className="loading">
       <Spinner>Loading...</Spinner>
     </div>
-    // {/* </div> */}
   );
 };
 

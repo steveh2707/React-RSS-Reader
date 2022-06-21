@@ -8,6 +8,7 @@ function ButtonsFooterArticle(props) {
   function nextArticle() {
     props.setSelectedArticle(props.selectedArticle + 1);
     props.currentArticle.read = true;
+    props.setFullArticle(false);
   }
 
   return (

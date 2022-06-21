@@ -37,33 +37,31 @@ const ArticleListItem = (props) => {
 
           <div className="articleListFeedTitle">{props.data.feed}</div>
 
-          <div className="flex-article-image">
-            {props.data.content.includes("img") ? (
-              <div className="flex-article">
-                <div className="flex-article-text">
-                  <div className="articleListTitle">{props.data.title}</div>
-                  <div className="articleListSnippet">
-                    {props.data.contentSnippet.substring(0, 110)}...
-                  </div>
-                </div>
-                <div className="flex-article-image">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      //eslint-disable-next-line
-                      __html: props.data.content.match(/\<img(.*?)\/>/i)[0],
-                    }}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div>
+          {props.data.content.includes("img") ? (
+            <div className="flex-article">
+              <div className="flex-article-text">
                 <div className="articleListTitle">{props.data.title}</div>
                 <div className="articleListSnippet">
-                  {props.data.contentSnippet.substring(0, 140)}...
+                  {props.data.contentSnippet.substring(0, 110)}...
                 </div>
               </div>
-            )}
-          </div>
+              <div className="flex-article-image">
+                <div
+                  dangerouslySetInnerHTML={{
+                    //eslint-disable-next-line
+                    __html: props.data.content.match(/\<img(.*?)\/>/i)[0],
+                  }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="articleListTitle">{props.data.title}</div>
+              <div className="articleListSnippet">
+                {props.data.contentSnippet.substring(0, 140)}...
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </button>

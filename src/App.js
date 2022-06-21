@@ -73,7 +73,6 @@ function App() {
     else {
       getRssFeed(rssFeeds[rssFeeds.length], setErrors, setData);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rssFeeds]);
 

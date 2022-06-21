@@ -34,11 +34,15 @@ code {
 .full-page-grid {
   height: 100vh;
   display: grid;
-  grid-template: 40px auto 40px / 17% 37% auto;
+  /* grid-template: 40px auto 40px / 17% 37% auto; */
+  grid-template: 40px auto 40px / 250px 500px minmax(600px, 800px);
   column-gap: 10px;
   row-gap: 0px;
   background-color: var(--background);
   color: var(--textColour);
+  /* max-width: 1650px; */
+  width: fit-content;
+  margin: auto;
 }
 
 .grid-header-left {
@@ -115,6 +119,13 @@ code {
 
 .buttons {
   color: var(--textColour);
+}
+
+.loading {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
