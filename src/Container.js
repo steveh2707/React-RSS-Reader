@@ -14,7 +14,15 @@ import ButtonsFooterArticle from "./ButtonsFooterArticle";
 import ButtonsHeaderFeeds from "./ButtonsHeaderFeeds";
 
 const Container = (props) => {
-  const { data, allItems, loading } = props;
+  const {
+    data,
+    allItems,
+    loading,
+    errors,
+    rssInput,
+    setRssInput,
+    setRssFeeds,
+  } = props;
   const [selectedArticle, setSelectedArticle] = useState(0);
   const [selectedFeed, setSelectedFeed] = useState(-1);
   const [alertOpen, setAlertOpen] = useState(true);
@@ -31,7 +39,7 @@ const Container = (props) => {
   } else {
     currentArticle = data[selectedFeed].items[selectedArticle];
     currentArticleList = data[selectedFeed].items;
-    heading = props.data[selectedFeed].title;
+    heading = data[selectedFeed].title;
   }
 
   if (loading) {
@@ -67,10 +75,14 @@ const Container = (props) => {
               setFullArticle={setFullArticle}
               alertOpen={alertOpen}
               setAlertOpen={setAlertOpen}
-              errors={props.errors}
+              errors={errors}
             />
           }
-          <AddRSSFeed />
+          <AddRSSFeed
+            rssInput={rssInput}
+            setRssInput={setRssInput}
+            setRssFeeds={setRssFeeds}
+          />
         </div>
 
         <div className="grid-content-middle">
